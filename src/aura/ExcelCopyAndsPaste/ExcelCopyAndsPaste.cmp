@@ -23,6 +23,6 @@
 						label="Convert" onclick="{!c.myAction}"/>
 				</td>
 			</tr>
-		</tbody>
+		</tbody> 
 	</table>
 </aura:component>

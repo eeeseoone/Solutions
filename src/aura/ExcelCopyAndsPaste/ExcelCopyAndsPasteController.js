@@ -1,56 +1,61 @@
 ({
 	init : function(cmp, event, helper){
-		console.log('we are in init!');
+		alert('we are in init!');
 	},
 	
-	myAction : function(cmp, event, helper) {
+	myAction : function(cmp, event, helper) { //근데 왜 convert 버튼 누르기도 전에 여기를 타는걸까
+		alert('we are in myAction');
 		var stringdata = cmp.get("v.exceldata");
-		console.log("current text: " + stringdata);
 		stringdata = String(stringdata);
-		var rows = stringdata.split('\n'); //총 몇줄인가요
-		console.log('rows[0]: ' + rows[0]);
+		console.log("복붙한 텍스트: " + stringdata);
+
+		var rows = stringdata.split('\n'); //행 기준으로 나눠서 리스트로 저장
+		console.log('행 수: '+ rows.length);
 		
-		var columns = rows[0].split('\t'); //컬럼수는 여기서 확정. 
-		console.log('all columns: ' + columns);
+		var columns = rows[0].split('\t'); //컬럼명들 저장
+		console.log('컬럼명: ' + columns);
+		var colnum = columns.length;
+		
+		const m = new Map();
+		var alldata = new Array();
 		
 		for(var i = 0; i<rows.length; i++){ //모든 row를 rows라는 리스트로 저장
-			console.log('rows'+i + rows[i]);
-		}
+			console.log(i+'행: ' + rows[i]);
+			m[String(i)] = rows[i];
+			var rowdata = rows[i].split('\t'); //arraylist
+			console.log('>>>>>map['+ i+']: ' + m[String(i)]);
+			console.log('>>>>>m.values(): '+ m.values());
 			
-					//컬럼명 제하기 위해 1부터 시작
-			for(var rownum = 0; rownum < rows.length; rownum++){
-				var alldata = {};
-				var data = rows[rownum].split('\t'); //1~x 번째 줄을 셀값별로 쪼갠다. data=한줄에 담긴 데이터
-				console.log('how many loops? ' + data.length); //컬럼갯수와 같은 넘버가 나온다 --->correct
-				alldata.add(data); //이렇게 하면 모든 셁값들이 그냥 좌르륵 저장되는것 
-				alert('this is row:' + row);
-				
-				/*
-				ExcelDataController controller = new ExcelDataController();
-				controller.parseData(alldata);
-				*/
-				
-				for(var cellnum = 0; cellnum < data.length; cellnum++){ //0~4
-					console.log(cellnum+'번째 컬럼 이름'+columns[cellnum]);
-					console.log('rownum: ' + rownum); //map에서 아이디 rownum으로, 나머지 data는 object로 묶기
-					console.log(cellnum+'번째 셀값 이름'+data[cellnum]);
-				}
+/*			for(var j =0; j<rowdata.length; j++){
+				alldata.push(rowdata[j]);
+				console.log('this is single cell adding up: ' +alldata);
+			}*/
+			for (const v of m.values()) {
+				console.log('values: '+ v);
 			}
+		}
+
 			
-			var action = cmp.get('c.parseData');
-			action.setParams({
-				alldata : cmp.get('v.exceldata')
-			});
-			action.setCallback(this, function(response){
-				var state = response.getState();
-				if(state == 'SUCCESS'){
-					console.log(state);
-				}else{
-					var errors = response.getError();
-					console.log('error : ' + errors[0].messag)
-				}
-			});
-			$A.enqueueAction(action);
+/*		var action = cmp.get('c.parseData');
+		action.setParams({
+			alldata : alldata
+		});*/
+		
+		var action = cmp.get('c.parseData1');
+		action.setParams({
+			rowsmap : m
+		});
+		
+		action.setCallback(this, function(response){
+			var state = response.getState();
+			if(state == 'SUCCESS'){
+				console.log(state);
+			}else{
+				var errors = response.getError();
+				console.log('error : ' + errors[0].messag)
+			}
+		});
+		$A.enqueueAction(action);
 	}
 
 /*
