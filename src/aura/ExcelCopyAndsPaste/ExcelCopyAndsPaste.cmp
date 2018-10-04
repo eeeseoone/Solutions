@@ -1,28 +1,188 @@
 <aura:component controller="ExcelDataController" implements="flexipage:availableForAllPageTypes,force:hasRecordId" access="global" >
-	<aura:attribute name="exceldata" type="String"/><!-- 유저가 복붙한 텍스트-->
+	<aura:attribute name="exceldata" type="String"/>
+	<aura:attribute name="celldata" type="String"/><!-- 유저가 복붙한 텍스트-->
+	<aura:attribute name="rownum" type="List"/>
+	<aura:attribute name="rowhead" type="String"/>
+
+	
 	<aura:handler name="init" value="{!this}" action="{!c.init}"/>
- 
-	<table class="slds-table slds-table--bordered slds-table--cell-buffer 
-		slds-table--striped slds-max-medium-table--stacked-horizontal" style="width: 45%;float: right;" role="grid">
-		<thead>
-			<tr class="slds-line-height_reset">
-				<th class="slds-text-title_caps" colspan="3" scope="colgroup">
-					<div class="slds-truncate" title="Excel Data">Paste Excel Data Here</div>
-				</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>
-					<ui:inputtextarea aura:id="exceldata" class="slds-input" rows="10" value="{!v.exceldata}"/>
-				</td>
-			</tr>
- 			<tr>
-				<td>
-					<lightning:button class="slds-button slds-button--neutral slds-button--brand" 
-						label="Convert" onclick="{!c.myAction}"/>
-				</td>
-			</tr>
-		</tbody> 
-	</table>
+		<table class="slds-table slds-table_cell-buffer slds-table_bordered" style="border-collapse: collapse; border:1px solid #dddbda;">
+			<thead>
+				<tr class="slds-line-height_reset">
+					<th class="slds-text-title_caps" scope="col">
+						<div class="slds-truncate" title=""></div>
+					</th>
+					<th class="slds-text-title_caps" scope="col">
+						<div style="text-align:center;" class="slds-truncate" title="">A</div>
+					</th>
+					<th class="slds-text-title_caps" scope="col">
+						<div style="text-align:center;" class="slds-truncate" title="">B</div>
+					</th>
+					<th class="slds-text-title_caps" scope="col">
+						<div style="text-align:center;" class="slds-truncate" title="">C</div>
+					</th>
+					<th class="slds-text-title_caps" scope="col">
+						<div style="text-align:center;" class="slds-truncate" title="">D</div>
+					</th>
+					<th class="slds-text-title_caps" scope="col">
+						<div style="text-align:center;" class="slds-truncate" title="">E</div>
+					</th>
+					<th class="slds-text-title_caps" scope="col">
+						<div style="text-align:center;" class="slds-truncate" title="">F</div>
+					</th>
+					<th class="slds-text-title_caps" scope="col">
+						<div style="text-align:center;" class="slds-truncate" title="">G</div>
+					</th>
+					<th class="slds-text-title_caps" scope="col">
+						<div style="text-align:center;" class="slds-truncate" title="">H</div>
+					</th>
+					<th class="slds-text-title_caps" scope="col">
+						<div style="text-align:center;" class="slds-truncate" title="">I</div>
+					</th>
+					<th class="slds-text-title_caps" scope="col">
+						<div style="text-align:center;" class="slds-truncate" title="">J</div>
+					</th>
+					<th class="slds-text-title_caps" scope="col">
+						<div style="text-align:center;" class="slds-truncate" title="">K</div>
+					</th>
+					<th class="slds-text-title_caps" scope="col">
+						<div style="text-align:center;" class="slds-truncate" title="">L</div>
+					</th>
+					<th class="slds-text-title_caps" scope="col">
+						<div style="text-align:center;" class="slds-truncate" title="">M</div>
+					</th>
+					<th class="slds-text-title_caps" scope="col">
+						<div style="text-align:center;" class="slds-truncate" title="">N</div>
+					</th>
+					<th class="slds-text-title_caps" scope="col">
+						<div style="text-align:center;" class="slds-truncate" title="">O</div>
+					</th>
+					<th class="slds-text-title_caps" scope="col">
+						<div style="text-align:center;" class="slds-truncate" title="">P</div>
+					</th>
+					<th class="slds-text-title_caps" scope="col">
+						<div style="text-align:center;" class="slds-truncate" title="">Q</div>
+					</th>
+					<th class="slds-text-title_caps" scope="col">
+						<div style="text-align:center;" class="slds-truncate" title="">R</div>
+					</th>
+					<th class="slds-text-title_caps" scope="col">
+						<div style="text-align:center;" class="slds-truncate" title="">S</div>
+					</th>					
+				</tr>
+			</thead>
+				<tbody>
+					<aura:iteration items="{!v.rownum}" var="num">
+					<!-- iteration needed -->
+						<tr class="slds-hint-parent">
+					
+						<!-- shows row number --> 
+						<th data-label="" scope="row" style="border: 1px solid #dddbda;">
+							<div class="slds-truncate" title="">{!num}</div>
+						</th>
+						<!-- rest of the row cells -->
+						<td data-label="" style="border: 1px solid #dddbda;">
+							<div class="slds-truncate" title="">
+								<ui:inputText value="{!v.celldata}"/>
+							</div>
+						</td>
+						<td data-label="" style="border: 1px solid #dddbda;">
+							<div class="slds-truncate" title="">
+								<ui:inputText value="{!v.celldata}"/>
+							</div>
+						</td>
+						<td data-label="" style="border: 1px solid #dddbda;">
+							<div class="slds-truncate" title="">
+								<ui:inputText value="{!v.celldata}"/>
+							</div>
+						</td>
+						<td data-label="" style="border: 1px solid #dddbda;">
+							<div class="slds-truncate" title="">
+								<ui:inputText value="{!v.celldata}"/>							
+							</div>
+						</td>
+						<td data-label="" style="border: 1px solid #dddbda;">
+							<div class="slds-truncate" title="">
+								<ui:inputText value="{!v.celldata}"/>							
+							</div>
+						</td>
+						<td data-label="" style="border: 1px solid #dddbda;">
+							<div class="slds-truncate" title="">
+								<ui:inputText value="{!v.celldata}"/>							
+							</div>
+						</td>
+						<td data-label="" style="border: 1px solid #dddbda;">
+							<div class="slds-truncate" title="">
+								<ui:inputText value="{!v.celldata}"/>							
+							</div>
+						</td>
+						<td data-label="" style="border: 1px solid #dddbda;">
+							<div class="slds-truncate" title="">
+								<ui:inputText value="{!v.celldata}"/>							
+							</div>
+						</td>
+						<td data-label="" style="border: 1px solid #dddbda;">
+							<div class="slds-truncate" title="">
+								<ui:inputText value="{!v.celldata}"/>							
+							</div>
+						</td>
+						<td data-label="" style="border: 1px solid #dddbda;">
+							<div class="slds-truncate" title="">
+								<ui:inputText value="{!v.celldata}"/>							
+							</div>
+						</td>
+						<td data-label="" style="border: 1px solid #dddbda;">
+							<div class="slds-truncate" title="">
+								<ui:inputText value="{!v.celldata}"/>							
+							</div>
+						</td>
+						<td data-label="" style="border: 1px solid #dddbda;">
+							<div class="slds-truncate" title="">
+								<ui:inputText value="{!v.celldata}"/>							
+							</div>
+						</td>
+						<td data-label="" style="border: 1px solid #dddbda;">
+							<div class="slds-truncate" title="">
+								<ui:inputText value="{!v.celldata}"/>							
+							</div>
+						</td>
+						<td data-label="" style="border: 1px solid #dddbda;">
+							<div class="slds-truncate" title="">
+								<ui:inputText value="{!v.celldata}"/>							
+							</div>
+						</td>
+						<td data-label="" style="border: 1px solid #dddbda;">
+							<div class="slds-truncate" title="">
+								<ui:inputText value="{!v.celldata}"/>							
+							</div>
+						</td>
+						<td data-label="" style="border: 1px solid #dddbda;">
+							<div class="slds-truncate" title="">
+								<ui:inputText value="{!v.celldata}"/>							
+							</div>
+						</td>
+						<td data-label="" style="border: 1px solid #dddbda;">
+							<div class="slds-truncate" title="">
+								<ui:inputText value="{!v.celldata}"/>							
+							</div>
+						</td>		
+						<td data-label="" style="border: 1px solid #dddbda;">
+							<div class="slds-truncate" title="">
+								<ui:inputText value="{!v.celldata}"/>							
+							</div>
+						</td>
+						<td data-label="" style="border: 1px solid #dddbda;">
+							<div class="slds-truncate" title="">
+								<ui:inputText value="{!v.celldata}"/>							
+							</div>
+						</td>																			
+					</tr>
+				</aura:iteration>
+			<div style="float: right;">
+				<lightning:button
+					class="slds-button slds-button--neutral slds-button--brand"
+					label="Convert" onclick="{!c.myAction}" />
+			</div>
+		</tbody>
+		</table>
 </aura:component>

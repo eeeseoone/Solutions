@@ -1,11 +1,13 @@
 ({
 	init : function(cmp, event, helper){
-		alert('we are in init!');
+		console.log('we are in init');
+		var rownum = [1,2,3,4,5,6,7,8,9,10,11,12]; //일단 12줄만
+		cmp.set("v.rownum", rownum);
 	},
 	
 	myAction : function(cmp, event, helper) { //근데 왜 convert 버튼 누르기도 전에 여기를 타는걸까
 		alert('we are in myAction');
-		var stringdata = cmp.get("v.exceldata");
+		var stringdata = cmp.get("v.celldata"); //
 		stringdata = String(stringdata);
 		console.log("복붙한 텍스트: " + stringdata);
 

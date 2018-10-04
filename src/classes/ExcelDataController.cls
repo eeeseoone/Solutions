@@ -12,7 +12,6 @@ public class ExcelDataController { //excel copy&past에서 붙인 엑셀데이�
     public static void parseData1(Map<String,List<String>> rowsmap){
     	System.debug('we are in parseData1');
     }
-    
     @AuraEnabled
     public static void showData(){
     	
